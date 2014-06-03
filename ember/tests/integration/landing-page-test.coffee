@@ -16,3 +16,8 @@ test 'Should inform about what this didiCAT peer is', ->
   visit('/').then ->
     equal find('p').text(), "This is a didiCAT peer, it resides in a network of friends.  All the friends work together to offer you a unified view on a set of underlying servers."
     
+test 'Should allow navigating back to home from other path', ->
+  visit('/').then ->
+    click("a:contains('peers')").then ->
+      click("a:contains('home')").then ->
+        equal find('h2#title').text(), "Hello, I'm a didiCAT peer"
