@@ -1,3 +1,4 @@
+#-*- mode: ruby -*-
 source 'https://rubygems.org'
 
 gem 'rails', '4.1.2.rc1'
@@ -8,7 +9,13 @@ gem 'spring', :group => :development
 
 gem 'sqlite3'
 
+gem 'active_model_serializers'
 
+group :development do
+  gem 'guard-bundler'
+  gem 'guard-rails'
+  gem 'guard-rspec'
+end
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
