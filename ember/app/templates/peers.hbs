@@ -1,1 +1,11 @@
-<h3>These are my peers</h3>
+<div class="peers">
+  <h3>These are my peers</h3>
+
+  <ul class="peers">
+    {{#each}}
+      <li>{{#link-to 'peers.show' this}}{{apiUrl}}{{/link-to}}</li>
+    {{/each}}
+  </ul>
+
+  {{outlet}}
+</div>
