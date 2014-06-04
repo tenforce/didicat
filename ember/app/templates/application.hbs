@@ -6,7 +6,7 @@
       <ul class="nav nav-tabs nav-justified">
         {{#link-to "application" tagName="li" classNames="home" href=false}}<a {{bind-attr href="view.href"}}>Home</a>{{/link-to}}
         {{#link-to "friends" tagName="li" href=false}}<a {{bind-attr href="view.href"}}>Friends</a>{{/link-to}}
-        <li><a href="#">Kittens</a></li>
+        {{#link-to "kittens" tagName="li" href=false}}<a {{bind-attr href="view.href"}}>Kittens</a>{{/link-to}}
         <li><a href="#">Plugins</a></li>
         <li><a href="#">Statistics</a></li>
         <li><a href="#">Configuration</a></li>

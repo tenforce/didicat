@@ -1,0 +1,13 @@
+<h3>These are my kittens</h3>
+
+<div class="kitten-explenation">
+  The kittens of a didiCat instance are the services which are queried by the didiCat instance.  When the didicat itself is queried (not asking it to look at its friends), then only this set of services is queried.
+</div>
+
+<ul class="kittens">
+  {{#each}}
+    <li>{{url}}</li>
+  {{/each}}
+</ul>
+
+{{outlet}}

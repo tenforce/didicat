@@ -8,9 +8,9 @@ module 'Integration - Landing Page',
   teardown: ->
     Ember.run App, 'destroy'
 
-test 'Should welcome me to Boston Ember', ->
+test 'Should welcome me to the site', ->
   visit('/').then ->
-    equal find('h2#title').text(), "Hello, I'm one of didiCAT's friends."
+    equal find('h2#title').text(), "Hello, I am one of didiCAT's friends."
 
 test 'Should inform about what this didiCat friend is', ->
   visit('/').then ->
@@ -20,4 +20,4 @@ test 'Should allow navigating back to home from other path', ->
   visit('/').then ->
     click("a:contains('Friends')").then ->
       click("a:contains('Home')").then ->
-        equal find('h2#title').text(), "Hello, I'm one of didiCAT's friends."
+        equal find('h2#title').text(), "Hello, I am one of didiCAT's friends."
