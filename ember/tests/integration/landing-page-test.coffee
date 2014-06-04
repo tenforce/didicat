@@ -18,6 +18,6 @@ test 'Should inform about what this didiCat friend is', ->
     
 test 'Should allow navigating back to home from other path', ->
   visit('/').then ->
-    click("a:contains('friends')").then ->
-      click("a:contains('home')").then ->
+    click("a:contains('Friends')").then ->
+      click("a:contains('Home')").then ->
         equal find('h2#title').text(), "Hello, I'm one of didiCAT's friends."

@@ -31,7 +31,7 @@ module 'Integration - Friends page',
     
 test 'Should navigate to the friends page', ->
   visit('/').then ->
-    click("a:contains('friends')").then ->
+    click("a:contains('Friends')").then ->
       equal find('h3').text(), 'These are my friends'
 
 test 'Should display a link to each friend', ->

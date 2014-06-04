@@ -4,4 +4,15 @@ nav ul li {
 
 img.banner {
     margin: 5em auto;
+    display: block;
+}
+
+.centered-tab-navigation  {
+
+    .home a {
+        background-color: #ccc !important;
+        color: #666;
+        font-weight: bold;
+        border-bottom-color:  #ddd !important;
+    }
 }

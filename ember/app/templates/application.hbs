@@ -1,28 +1,18 @@
-<nav class="navbar navbar-default navbar-static-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      {{#link-to 'application' classNames="navbar-brand"}}didiCat{{/link-to}}
-    </div>
-
-    <div class="collapse navbar-collapse" id="main-navbar-collapse">
-      <ul class="nav navbar-nav">
-        <li>{{#link-to 'application'}}home{{/link-to}}</li>
-        <li>{{#link-to 'friends'}}friends{{/link-to}}</li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
 <div class="container">
-
   <img src="/images/je-mappelle.png" class="banner" alt="didicat banner" />
 
+  <nav>
+    <div class="centered-tab-navigation">
+      <ul class="nav nav-tabs nav-justified">
+        {{#link-to "application" tagName="li" classNames="home" href=false}}<a {{bind-attr href="view.href"}}>Home</a>{{/link-to}}
+        {{#link-to "friends" tagName="li" href=false}}<a {{bind-attr href="view.href"}}>Friends</a>{{/link-to}}
+        <li><a href="#">Kittens</a></li>
+        <li><a href="#">Plugins</a></li>
+        <li><a href="#">Statistics</a></li>
+        <li><a href="#">Configuration</a></li>
+      </ul>
+    </div>
+  </nav>
 
   {{outlet}}
 
