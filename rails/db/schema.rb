@@ -13,9 +13,8 @@
 
 ActiveRecord::Schema.define(version: 20140603141902) do
 
-  create_table "peers", force: true do |t|
-    t.string   "api_url"
-    t.string   "peer_url"
+  create_table "friends", force: true do |t|
+    t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

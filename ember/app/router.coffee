@@ -2,7 +2,7 @@ Router = Ember.Router.extend
   location: ENV.locationType
 
 Router.map ->
-  @resource 'peers', ->
+  @resource 'friends', ->
     @route 'show', path: ':id'
 
 `export default Router;`

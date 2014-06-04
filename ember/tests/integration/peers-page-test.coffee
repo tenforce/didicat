@@ -3,48 +3,43 @@
 App = null
 server = null
 
-peers = [ {
+friends = [ {
   id: 1
-  api_url: 'http://127.0.0.1:3001/peers'
-  peer_url: 'http://127.0.0.1:3001/'
+  url: 'http://127.0.0.1:3001/'
 }, {
-  id: 2,
-  api_url: 'http://127.0.0.1:3002/peers'
-  peer_url: 'http://127.0.0.1:3002/'
+  id: 2
+  url: 'http://127.0.0.1:3002/'
 }, {
-  id: 3,
-  api_url: 'http://127.0.0.1:3003/peers'
-  peer_url: 'http://127.0.0.1:3003/'
+  id: 3
+  url: 'http://127.0.0.1:3003/'
 } ]
 
-module 'Integration - Peers page',
+module 'Integration - Friends page',
   setup: ->
     App = startApp()
 
     server = new Pretender ->
-      @get '/api/peers', (request) ->
-        [200, {'Content-Type': 'application/json'}, JSON.stringify(peers: peers)]
-      @get '/api/peers/:id', (request) ->
-        peer = peers.findBy 'id', +request.params.id
-        [200, {'Content-Type': 'application/json'}, JSON.stringify(peer: peer)]
+      @get '/api/friends', (request) ->
+        [200, {'Content-Type': 'application/json'}, JSON.stringify(friends: friends)]
+      @get '/api/friends/:id', (request) ->
+        friend = friends.findBy 'id', +request.params.id
+        [200, {'Content-Type': 'application/json'}, JSON.stringify(friends: friend)]
 
   teardown: ->
     Ember.run(App, 'destroy')
     server.shutdown()
     
-test 'Should navigate to the peer page', ->
+test 'Should navigate to the friends page', ->
   visit('/').then ->
-    click("a:contains('peers')").then ->
-      equal find('h3').text(), 'These are my peers'
+    click("a:contains('friends')").then ->
+      equal find('h3').text(), 'These are my friends'
 
-test 'Should display a link to each peer', ->
-  visit('/peers').then ->
-    for peer in peers
-      equal find("a:contains('#{peer.api_url}')").length, 1
+test 'Should display a link to each friend', ->
+  visit('/friends').then ->
+    for friend in friends
+      equal find("a:contains('#{friend.url}')").length, 1
   
-test 'Should display the apiUrl and peerUrl', ->
-  peer = peers.get('firstObject')
-  visit("/peers/#{peer.id}").then ->
-    equal find('.peer h4').text(), peer.peer_url
-    equal find('.peer p').text(), peer.api_url
-
+test 'Should display the url', ->
+  friend = friends.get('firstObject')
+  visit("/friends/#{friend.id}").then ->
+    equal find('.friend h4').text(), friend.url

@@ -1,0 +1,11 @@
+<div class="friends">
+  <h3>These are my friends</h3>
+
+  <ul>
+    {{#each}}
+      <li>{{#link-to 'friends.show' this}}{{url}}{{/link-to}}</li>
+    {{/each}}
+  </ul>
+
+  {{outlet}}
+</div>
