@@ -1,0 +1,11 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">Add a kitten!</div>
+  <div class="panel-body">
+    {{input type="text" action="create" value=url placeholder="http://edcat.tenforce.com/" classNames="form-control"}}
+    <p>
+      {{#if url}}
+        Press return to add this kitten!
+      {{/if}}
+    </p>
+  </div>
+</div>
