@@ -1,0 +1,15 @@
+defaults: &defaults
+  endpoint: http://localhost:8890/ds/query
+  config_graph: http://ddcat.edcat.tenforce.com/config
+  plugin_graph: http://ddcat.edcat.tenforce.com/plugins
+  peer_graph: http://ddcat.edcat.tenforce.com/peers
+  edcat_graph: http://ddcat.edcat.tenforce.com/edcats
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
