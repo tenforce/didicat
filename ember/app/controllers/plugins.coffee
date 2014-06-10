@@ -7,5 +7,7 @@ PluginsController = Ember.ArrayController.extend
         data: plugin: url: url
       ).then =>
         @store.find 'plugin'
+    deletePlugin: (plugin) ->
+      plugin.destroyRecord()
 
 `export default PluginsController;`
