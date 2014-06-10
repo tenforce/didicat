@@ -2,9 +2,9 @@ class Api::PluginsController < ApplicationController
   before_action :set_plugin, only: [:show, :edit, :update, :destroy]
 
   def index
-    render json: { plugins: Plugin.all.collect do |p| { url: p.url.to_s, id: p.url.to_s } end }
+    render json: Plugin.all, each_serializer: PluginSerializer
+    # json: { plugins: Plugin.all.collect do |p| { url: p.url.to_s, id: p.url.to_s } end }
     #, each_serializer: PluginSerializer
-
   end
 
   def show

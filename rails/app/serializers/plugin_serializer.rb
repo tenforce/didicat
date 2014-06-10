@@ -1,11 +1,8 @@
 class PluginSerializer < ActiveModel::Serializer
-  attributes :url
+  attributes :url, :id
 
-  # def id
-  #   url
-  # end
+  def id
+    url
+  end
 
-  # def url
-  #   object.url.to_s
-  # end
 end
