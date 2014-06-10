@@ -1,5 +1,6 @@
 defaults: &defaults
-  endpoint: http://localhost:8890/ds/query
+  endpoint: http://localhost:8890/sparql
+  # endpoint: http://localhost:8890/ds/query
   config_graph: http://ddcat.edcat.tenforce.com/config
   plugin_graph: http://ddcat.edcat.tenforce.com/plugins
   peer_graph: http://ddcat.edcat.tenforce.com/peers

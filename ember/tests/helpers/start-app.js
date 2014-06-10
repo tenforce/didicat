@@ -1,4 +1,5 @@
 /* global require */
+require('didicat/tests/helpers/should-have-element');
 
 var Application = require('didicat/app')['default'];
 var Router = require('didicat/router')['default'];

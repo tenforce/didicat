@@ -1,0 +1,18 @@
+<h3>These are my plugins</h3>
+
+<div class="row">
+  <div class="col-md-8">
+    <p class="plugin-explenation">Plugins define which requests the peer supports and how the requests should be combined.  The plugins thus inform this didicat peer how the responses of the different peer and children should be combined.  It also informs the didicat peer on how it should talk to its kittens and how it should transform the results.</p>
+
+    <ul>
+      {{#each}}
+        <li>{{url}}</li>
+      {{/each}}
+    </ul>
+  </div>
+
+  <div class="col-md-4">
+    {{new-plugin action="createPlugin"}}
+  </div>
+
+</div>

@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   namespace :api do
     resources :friends
     resources :kittens
+    resources :plugins
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

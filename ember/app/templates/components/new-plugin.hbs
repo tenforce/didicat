@@ -1,0 +1,11 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">Add a plugin!</div>
+  <div class="panel-body">
+    {{input type="text" action="create" value=url placeholder="http://edcat.tenforce.com/example-plugin" classNames="form-control"}}
+    <p>
+      {{#if url}}
+        Press return to add this plugin!
+      {{/if}}
+    </p>
+  </div>
+</div>
