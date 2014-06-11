@@ -72,7 +72,7 @@ module ActiveSparql
 
     # Support for serializers
     def read_attribute_for_serialization(attr)
-      if attr = :url
+      if attr == :url
         @url.to_s
       else
         self.send(attr)

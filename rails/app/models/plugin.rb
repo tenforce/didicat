@@ -10,7 +10,6 @@ class Plugin < ActiveSparql::Base
     Cfg.plugin_graph
   end
 
-
   def self.all_query
 <<SPARQL
   SELECT ?id ?url
