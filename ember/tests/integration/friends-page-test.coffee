@@ -4,13 +4,13 @@ App = null
 server = null
 
 friends = [ {
-  id: 1
+  id: 'http://127.0.0.1:3001/'
   url: 'http://127.0.0.1:3001/'
 }, {
-  id: 2
+  id: 'http://127.0.0.1:3002/'
   url: 'http://127.0.0.1:3002/'
 }, {
-  id: 3
+  id: 'http://127.0.0.1:3003/'
   url: 'http://127.0.0.1:3003/'
 } ]
 
@@ -41,5 +41,5 @@ test 'Should display a link to each friend', ->
   
 test 'Should display the url', ->
   friend = friends.get('firstObject')
-  visit("/friends/#{friend.id}").then ->
+  visit("/friends/#{encodeURIComponent friend.url}").then ->
     equal find('.friend h4').text(), friend.url

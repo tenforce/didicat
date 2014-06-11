@@ -3,7 +3,7 @@ Router = Ember.Router.extend
 
 Router.map ->
   @resource 'friends', ->
-    @route 'show', path: ':id'
+    @route 'show', path: ':friend_url'
   @resource 'kittens'
   @resource 'plugins'
 
