@@ -3,6 +3,8 @@ Rails.application.routes.draw do
     resources :friends
     resources :kittens
     resources :plugins
+
+    post 'peer_cnnctr' => "peer_cnnctr#update"
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

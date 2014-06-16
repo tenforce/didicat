@@ -2,6 +2,16 @@ class Friend < ActiveSparql::Base
   attr_accessor :url
   validates_presence_of :url
 
+  # Indicates that the friend with url URL joined the peer group
+  def join( url)
+    friend.find( url ).destroy
+  end
+
+  # Indicates that the friend with url URL left the peer group
+  def leave( url )
+    Friend.new( url: url ).save
+  end
+
 protected
 
   TYPE_URI = 'http://ddcat.edcat.tenforce.com/Friend'.to_uri
