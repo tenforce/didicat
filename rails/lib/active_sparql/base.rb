@@ -36,8 +36,18 @@ module ActiveSparql
 
     # Loads a stored object from the database
     def self.load( *args )
-      object = self.new *args
-      object.id = args.first[:id]
+      # fetch the classname
+      args = args.map { |a| a.to_hash }
+      options = args.first
+      if options[:class]
+        klass = Kernel.const_get options[:class].to_s
+        options.delete :class
+      else
+        klass = self
+      end
+
+      object = klass.new *args
+      object.id = options[:id]
       object.persist!
       object
     end
