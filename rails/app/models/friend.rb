@@ -3,13 +3,13 @@ class Friend < ActiveSparql::Base
   validates_presence_of :url
 
   # Indicates that the friend with url URL joined the peer group
-  def join( url)
-    friend.find( url ).destroy
+  def self.join( url)
+    Friend.new( url: url ).save
   end
 
   # Indicates that the friend with url URL left the peer group
-  def leave( url )
-    Friend.new( url: url ).save
+  def self.leave( url )
+    Friend.find( url ).destroy
   end
 
 protected
@@ -36,6 +36,7 @@ SPARQL
   SELECT ?url
   WHERE {
     ?url a <#{TYPE_URI}>.
+    VALUES ?url {<#{url}>}
   }
 SPARQL
   end
@@ -57,8 +58,7 @@ SPARQL
 <<SPARQL
   SELECT ?subject, ?predicate, ?object
   WHERE {
-    ?foo <http://ddcat.edcat.tenforce.com/identifier> "#{id}".
-    ?foo !<wuk:doesntexist>* ?subject.
+    <#{url}> !<wuk:doesntexist>* ?subject.
     ?subject ?predicate ?object
   }
 SPARQL
