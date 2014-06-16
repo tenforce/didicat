@@ -1,0 +1,14 @@
+defaults: &defaults
+  own_contact_point: http://localhost:3000/api/peer_cnnctr
+  shared_contact_url: http://localhost:3000/api
+  peer_cnnctr_url: http://localhost:3001/
+  peer_cnnctr_peer_group: didicat
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

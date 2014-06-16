@@ -1,0 +1,1 @@
+Friend.register_at_peer_cnnctr

@@ -12,6 +12,20 @@ class Friend < ActiveSparql::Base
     Friend.find( url ).destroy
   end
 
+  def self.register_at_peer_cnnctr
+    # destroy the current friends
+    Friend.all.map &:destroy
+    # call the peer_cnnctr and add all current friends
+    peer_cnnctr_uri = URI "#{Cfg.peer_cnnctr_url}peer_groups/#{Cfg.peer_cnnctr_peer_group}/peers.json"
+    my_cnnctr_info = { "peer[contact_point]" => Cfg.own_contact_point, "peer[shared_contact_url]" => Cfg.shared_contact_url }
+    result = Net::HTTP.post_form( peer_cnnctr_uri , my_cnnctr_info )
+    json = JSON.parse result.body
+    json["peers"].each do |contact_point|
+      # add our freshly joined peers
+      Friend.new( url: contact_point ).save
+    end
+  end
+
 protected
 
   TYPE_URI = 'http://ddcat.edcat.tenforce.com/Friend'.to_uri
