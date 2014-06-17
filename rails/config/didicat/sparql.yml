@@ -6,6 +6,7 @@ defaults: &defaults
   peer_graph: http://ddcat.edcat.tenforce.com/peers
   edcat_graph: http://ddcat.edcat.tenforce.com/edcats
   friend_graph: http://ddcat.edcat.tenforce.com/friends
+  active_sparql_graph: http://ddcat.edcat.tenforce.com/active_sparql
 
 development:
   <<: *defaults
