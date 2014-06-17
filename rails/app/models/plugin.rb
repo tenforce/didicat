@@ -2,7 +2,25 @@ class Plugin < ActiveSparql::Base
   attr_accessor :id,:url,:requests
   validates_presence_of :url
 
-  protected
+  # Retrieves the plugin based on the posed request object
+  def self.find_by_request( path, method )
+    urls = Db.query(:plugin) do
+<<SPARQL
+  SELECT DISTINCT ?url
+  WHERE {
+    ?url a <http://ddcat.tenforce.com/Plugin>;
+         <http://ddcat.tenforce.com/request> ?request.
+    ?request <http://ddcat.tenforce.com/pathRegex> ?regex;
+             <http://ddcat.tenforce.com/verb> "#{method.to_s.upcase}".
+    FILTER regex("#{path}", ?regex)
+  }
+SPARQL
+    end
+
+    urls.map { |url| Plugin.find url }
+  end
+
+protected
 
   # Override to return a String containing the graph where objects of this
   # kind are stored.
