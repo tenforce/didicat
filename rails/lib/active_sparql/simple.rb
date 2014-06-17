@@ -37,7 +37,7 @@ module ActiveSparql
     # from Base#all_query
     def self.all_query
 <<SPARQL
-  SELECT ?url #{sparql_pred_variables}
+  SELECT DISTINCT ?url #{sparql_pred_variables}
   WHERE {
     { ?url a <#{self.class_uri}>. }
     #{sparql_pred_paths.map{|path| " UNION { #{path} } "}.join("\n")}
@@ -48,7 +48,7 @@ SPARQL
     # from Base#find_query
     def self.find_query( url )
 <<SPARQL
-  SELECT ?url #{sparql_pred_variables}
+  SELECT DISTINCT ?url #{sparql_pred_variables}
   WHERE {
     VALUES ?url {<#{url}>}
     { ?url a <http://ddcat.tenforce.com/Plugin>. }
@@ -87,7 +87,7 @@ SPARQL
       end
 
       # set the class name
-      graph << [url.to_uri, "http://www.w3.org/1999/02/22-rdf-syntax-ns#type".to_uri, klass.class_uri]
+      graph << [url.to_uri, "http://www.w3.org/1999/02/22-rdf-syntax-ns#type".to_uri, klass.class_uri.to_uri]
       # set the application class
       graph << [url.to_uri, "http://active_sparql.sem.tf/v0.1#applicationClass".to_uri, klass.to_s ]
     end
@@ -95,7 +95,7 @@ SPARQL
     def fetch_object_triples
       Db.query(klass.object_graph) do
 <<SPARQL
-  SELECT ?subject, ?predicate, ?object
+  SELECT DISTINCT ?subject, ?predicate, ?object
   WHERE {
     <#{url}> !<wuk:doesntexist>* ?subject.
     ?subject ?predicate ?object.
