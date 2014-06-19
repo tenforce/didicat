@@ -48,9 +48,8 @@ SPARQL
     # from Base#find_query
     def self.find_query( url )
 <<SPARQL
-  SELECT DISTINCT ?url #{sparql_pred_variables}
+  SELECT DISTINCT <#{url}> AS ?url ?class #{sparql_pred_variables}
   WHERE {
-    VALUES ?url {<#{url}>}
     { ?url a <http://ddcat.tenforce.com/Plugin>. }
     #{sparql_pred_paths.map{|path| " UNION { #{path} } "}.join("\n")}
     UNION {
