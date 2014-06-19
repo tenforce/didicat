@@ -1,4 +1,7 @@
-class Plugin < ActiveSparql::Base
+class Plugin < ActiveSparql::Simple
+  pred :regex, ["http://ddcat.tenforce.com/request", "http://ddcat.tenforce.com/pathRegex"]
+  pred :verb,  ["http://ddcat.tenforce.com/request", "http://ddcat.tenforce.com/verb"]
+
   attr_accessor :id,:url,:requests
   validates_presence_of :url
 
@@ -22,57 +25,8 @@ SPARQL
 
 protected
 
-  # Override to return a String containing the graph where objects of this
-  # kind are stored.
   def self.object_graph
     Cfg.plugin_graph
-  end
-
-  def self.all_query
-<<SPARQL
-  SELECT ?id ?url
-  WHERE {
-    ?url a <http://ddcat.tenforce.com/Plugin>.
-    ?url <http://ddcat.tenforce.com/identifier> ?id.
-  }
-SPARQL
-  end
-
-  def self.find_query( id )
-<<SPARQL
-  SELECT "#{id}" as ?id  ?url
-  WHERE {
-    ?url a <http://ddcat.tenforce.com/Plugin>.
-    ?url <http://ddcat.tenforce.com/identifier> "#{id}"
-  }
-SPARQL
-  end
-
-  # Enters the triples which define this graph in the Peer.
-  def fill_save_graph( graph )
-    if persisted?
-      fetch_object_triples.each do |statement|
-        graph << RDF::Statement(statement.to_hash)
-      end
-    else
-      graph.load url
-      real_url = graph.select{|x| x.object == "http://ddcat.tenforce.com/Plugin".to_uri}.first.subject
-      graph << [real_url, "http://ddcat.tenforce.com/identifier".to_uri, id ]
-    end
-  end
-
-  # Enters the triples which define this graph in the Peer.
-  def fetch_object_triples
-    Db.query(:plugin) do
-<<SPARQL
-  SELECT ?subject, ?predicate, ?object
-  WHERE {
-    ?foo <http://ddcat.tenforce.com/identifier> "#{id}".
-    ?foo !<wuk:doesntexist>* ?subject.
-    ?subject ?predicate ?object
-  }
-SPARQL
-    end
   end
 
   # Names of the headers which ought to be forwarded for this request
