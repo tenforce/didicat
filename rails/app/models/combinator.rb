@@ -25,7 +25,9 @@
 #
 # Override the combine and the base_value methods and you're ready to
 # go.
-class Combinator
+class Combinator < ActiveSparql::Simple
+
+  @@class_uri = "http://active-sparql.sem.tf/v0.1#combinator"
 
   # Returns the base_value which is used to combine the first result.
   def base_value
