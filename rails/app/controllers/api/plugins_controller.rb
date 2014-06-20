@@ -12,12 +12,11 @@ class Api::PluginsController < ApplicationController
   end
 
   def create
-    plugin = Plugin.new plugin_params
-
-    if plugin.save
-      render json: plugin
-    else
-      render json: plugin.errors, status: :unprocessable_entity
+    begin
+      Plugin.add_remote_plugin params[:plugin][:url]
+      head :no_content, status: 200
+    rescue
+      render json: { error: "Could not fetch plugin" }, status: :unprocessable_entity
     end
   end
 

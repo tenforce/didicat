@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   namespace :api do
     resources :friends
     resources :kittens
+
+    delete 'plugins/:id' => 'plugins#destroy', :constraints => { :id => /[^\/]+/}
+    put 'plugins/:id'    => 'plugins#update' , :constraints => { :id => /[^\/]+/}
     resources :plugins
 
     post 'peer_cnnctr' => "peer_cnnctr#update"

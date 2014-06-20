@@ -1,9 +1,17 @@
 class Plugin < ActiveSparql::Simple
+  @class_uri = 'http://ddcat.tenforce.com/Plugin'
   pred :regex, ["http://ddcat.tenforce.com/request", "http://ddcat.tenforce.com/pathRegex"]
   pred :verb,  ["http://ddcat.tenforce.com/request", "http://ddcat.tenforce.com/verb"]
 
   attr_accessor :id,:url,:requests
   validates_presence_of :url
+
+  # Retrieves the plugins from a remote source
+  def self.add_remote_plugin( url )
+    graph = RDF::Graph.new
+    graph.load url
+    Db.insert_data graph, graph: object_graph
+  end
 
   # Retrieves the plugin based on the posed request object
   def self.find_by_request( path, method )
