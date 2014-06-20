@@ -17,7 +17,11 @@ group :development do
   gem 'guard-rspec'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'pry'
+  gem 'pry-rails'
 end
+
+gem 'nokogiri'
 
 gem 'sparql-client', require: 'sparql/client'
 gem 'rdf-turtle', require: 'rdf/turtle'
