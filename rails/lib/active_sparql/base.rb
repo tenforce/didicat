@@ -75,11 +75,6 @@ module ActiveSparql
       @persisted
     end
 
-    # Returns the class object of the current object
-    def klass
-      self.class
-    end
-
     # Support for serializers
     def read_attribute_for_serialization(attr)
       if attr == :url
@@ -90,6 +85,11 @@ module ActiveSparql
     end
 
   protected
+
+    # Returns the class object of the current object
+    def klass
+      self.class
+    end
 
     # Override to return a String containing the graph where objects of this
     # kind are stored.

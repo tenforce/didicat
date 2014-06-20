@@ -5,8 +5,6 @@ module ActiveSparql
     @class_uri = "http://active-sparql.sem.tf/v0.1#simple"
     @variables = {}
 
-    klass = self
-
     def self.variables
       @variables ||= {}
     end
