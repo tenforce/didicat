@@ -4,9 +4,24 @@ module ActiveSparql
     attr_accessor :url
     @class_uri = "http://active-sparql.sem.tf/v0.1#simple"
     @variables = {}
+    @has_one_links = {}
 
     def self.variables
       @variables ||= {}
+    end
+
+    def self.has_one_links
+      @has_one_links ||= {}
+    end
+
+    def self.load( *args )
+      result = super( *args )
+      has_one_links.each do |pred,options|
+        klass = Kernel.const_get options[:class].to_s.classify
+        url = result.send pred
+        result.send( "#{pred.to_s}=".to_sym , klass.find( url ) ) if url
+      end
+      result
     end
 
     def self.class_uri
@@ -25,6 +40,18 @@ module ActiveSparql
       sym = sym.to_sym
       self.variables[sym.to_sym] = predicates.map &:to_uri
       attr_accessor sym.to_sym
+    end
+
+    def self.has_one( attr_name, predicates, options={} )
+      attr_name = attr_name.to_sym
+      options[:class] ||= attr_name.to_sym
+      # accept one or multiple predicates
+      unless predicates.instance_of? Array
+        predicates = [ predicates ]
+      end
+      # use symbol as variable
+      attr_accessor attr_name
+      self.has_one_links[attr_name] = { :predicates => predicates.map(&:to_uri) , :class => options[:class] }
     end
 
     # from Base#object_graph
@@ -63,7 +90,12 @@ SPARQL
       predicate_connection = {[] => url.to_uri}
       klass.variables.each do |keyword, predicates|
         value = self.send keyword
-        predicate_connection[predicates] = self.send keyword if value != nil
+        predicate_connection[predicates] = self.send value if value != nil
+      end
+      # insert the information from the has_one_links
+      klass.has_one_links.each do |keyword, options|
+        object = self.send( keyword )
+        predicate_connection[predicates] = object.url if object
       end
 
       predicate_connection.clone.each do |predicates , keyword|
