@@ -30,6 +30,7 @@
 # from NodeFilter and define the applicationClass in the specification
 # of the plugin.
 class NodeFilter < ActiveSparql::Simple
+  include PluginComponentMixin
 
   @@class_uri = "http://active-sparql.sem.tf/v0.1#node_filter"
 

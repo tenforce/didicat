@@ -19,6 +19,7 @@
 # A default implementation for the dispatcher sends the requests to
 # each of the nodes in series.
 class Dispatcher < ActiveSparql::Simple
+  include PluginComponentMixin
 
   @@class_uri = "http://active-sparql.sem.tf/v0.1#dispatcher"
 

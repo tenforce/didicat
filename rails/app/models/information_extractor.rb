@@ -24,6 +24,7 @@
 # inherits from InformationExtractor and define the applicationClass
 # in the extractor itself.
 class InformationExtractor < ActiveSparql::Simple
+  include PluginComponentMixin
 
   @@class_uri = "http://active-sparql.sem.tf/v0.1#information_extractor"
 

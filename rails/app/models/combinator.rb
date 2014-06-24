@@ -26,8 +26,14 @@
 # Override the combine and the base_value methods and you're ready to
 # go.
 class Combinator < ActiveSparql::Simple
+  include PluginComponentMixin
 
   @@class_uri = "http://active-sparql.sem.tf/v0.1#combinator"
+
+  # Retrieves the plugin
+  def plugin
+    @plugin
+  end
 
   # Returns the base_value which is used to combine the first result.
   def base_value
