@@ -9,7 +9,7 @@ module ActiveSparql
 
     def initialize(*args)
       @persisted = false
-      super(*args)
+      super
     end
 
     # Saves the object to the database
