@@ -17,8 +17,10 @@ class Db < SPARQL::Client
     else
       query,graph = args
     end
+    # maybe scope to graph
     graph = translate_graph_from_argument(graph)
     query.gsub! /WHERE/i,"FROM <#{graph.to_s}>\n WHERE" if graph
+    # execute query
     super( query )
   end
 
@@ -39,7 +41,7 @@ private
 
   def translate_graph_from_argument( graph )
     if graph.is_a? Symbol
-      RDF::URI.new klass["#{graph.to_s}_graph"]
+      RDF::URI.new Cfg["#{graph.to_s}_graph"]
     else
       graph
     end
