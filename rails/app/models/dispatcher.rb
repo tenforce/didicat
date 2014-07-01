@@ -37,7 +37,7 @@ class Dispatcher < ActiveSparql::Simple
 
   # Dispatches the request to a single kitten.
   def dispatch_kitten( kitten )
-    raise "Dispatcher #{self.to_s} should implement dispatch_kitten, dispatch_kittens or dispatch."
+    raise "Dispatcher #{self.class.to_s} should implement dispatch_kitten, dispatch_kittens or dispatch."
   end
 
   # Dispatches the request to the friends.
@@ -47,6 +47,6 @@ class Dispatcher < ActiveSparql::Simple
 
   # Dispatches the request to a single friend.
   def dispatch_friend( friend )
-    raise "Dispatcher #{self.to_s} should implement dispatch_friend, dispatch_friends or dispatch."
+    raise "Dispatcher #{self.class.to_s} should implement dispatch_friend, dispatch_friends or dispatch."
   end
 end

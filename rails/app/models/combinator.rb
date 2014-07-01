@@ -37,12 +37,12 @@ class Combinator < ActiveSparql::Simple
 
   # Returns the base_value which is used to combine the first result.
   def base_value
-    raise "#{self.name} should define a none_value."
+    raise "#{self.class.name} should define a none_value."
   end
 
   # Combines the first value with the newly extracted information.
   def combine( base, extracted_information )
-    raise "#{self.name} should override the combine method."
+    raise "#{self.class.name} should override the combine method."
   end
 
 end

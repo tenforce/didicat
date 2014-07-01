@@ -31,7 +31,7 @@ class InformationExtractor < ActiveSparql::Simple
   # Extracts the information from the response and/or body.  The body
   # provides an easier way of accessing the returned content.
   def extract( response, body )
-    raise "#{self.name} should override the extract method."
+    raise "#{self.class.name} should override the extract method."
   end
 
 end
