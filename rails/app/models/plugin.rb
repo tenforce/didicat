@@ -37,10 +37,6 @@ SPARQL
 
 protected
 
-  def self.object_graph
-    Cfg.plugin_graph
-  end
-
   # Names of the headers which ought to be forwarded for this request
   def self.required_headers_for_request( request_uri )
     Db.query(:plugin) do
