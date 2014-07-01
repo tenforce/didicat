@@ -26,7 +26,7 @@
 class InformationExtractor < ActiveSparql::Simple
   include PluginComponentMixin
 
-  @@class_uri = "http://active-sparql.sem.tf/v0.1#information_extractor"
+  @@class_uri = "http://didicat.sem.tf/v0.1/information_extractor"
 
   # Extracts the information from the response and/or body.  The body
   # provides an easier way of accessing the returned content.

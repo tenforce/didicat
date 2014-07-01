@@ -28,7 +28,7 @@
 class Combinator < ActiveSparql::Simple
   include PluginComponentMixin
 
-  @@class_uri = "http://active-sparql.sem.tf/v0.1#combinator"
+  @class_uri = "http://didicat.sem.tf/v0.1/combinator"
 
   # Retrieves the plugin
   def plugin

@@ -1,11 +1,11 @@
 class Plugin < ActiveSparql::Simple
-  @class_uri = 'http://ddcat.tenforce.com/Plugin'
-  pred :regex, ["http://ddcat.tenforce.com/request", "http://ddcat.tenforce.com/pathRegex"]
-  pred :verb,  ["http://ddcat.tenforce.com/request", "http://ddcat.tenforce.com/verb"]
-  has_one :filter, ["http://ddcat.tenforce.com/filter"], class: :node_filter
-  has_one :combinator, "http://ddcat.tenforce.com/combinator"
-  has_one :extractor, "http://ddcat.tenforce.com/extractor", class: :information_extractor
-  has_one :dispatcher, "http://ddcat.tenforce.com/dispatcher"
+  @class_uri = 'http://didicat.sem.tf/v0.1/Plugin'
+  pred :regex, "http://didicat.sem.tf/v0.1/regex"
+  pred :verb,  "http://didicat.sem.tf/v0.1/verb"
+  has_one :filter, ["http://didicat.sem.tf/v0.1/filter"], class: :node_filter
+  has_one :combinator, "http://didicat.sem.tf/v0.1/combinator"
+  has_one :extractor, "http://didicat.sem.tf/v0.1/extractor", class: :information_extractor
+  has_one :dispatcher, "http://didicat.sem.tf/v0.1/dispatcher"
 
   attr_accessor :id,:url,:requests
   validates_presence_of :url

@@ -2,7 +2,7 @@ module ActiveSparql
   class Simple < Base
 
     attr_accessor :url
-    @class_uri = "http://active-sparql.sem.tf/v0.1#simple"
+    @class_uri = "http://active-sparql.sem.tf/v0.1/simple"
     @variables = {}
     @has_one_links = {}
 

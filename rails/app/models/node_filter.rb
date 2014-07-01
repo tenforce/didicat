@@ -32,7 +32,7 @@
 class NodeFilter < ActiveSparql::Simple
   include PluginComponentMixin
 
-  @@class_uri = "http://active-sparql.sem.tf/v0.1#node_filter"
+  @@class_uri = "http://didicat.sem.tf/v0.1/node_filter"
 
   # Retrun true if we should contact friend when handling request.
   #
