@@ -119,7 +119,7 @@ SPARQL
       # set the class name
       graph << [url.to_uri, "http://www.w3.org/1999/02/22-rdf-syntax-ns#type".to_uri, klass.class_uri.to_uri]
       # set the application class
-      graph << [url.to_uri, "http://active_sparql.sem.tf/v0.1#applicationClass".to_uri, klass.to_s ]
+      graph << [url.to_uri, "http://active-sparql.sem.tf/v0.1/applicationClass".to_uri, klass.to_s ]
     end
 
     def fetch_object_triples
