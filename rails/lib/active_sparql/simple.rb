@@ -65,7 +65,7 @@ module ActiveSparql
   SELECT DISTINCT ?url #{sparql_pred_variables}
   WHERE {
     { ?url a <#{self.class_uri}>. }
-    #{sparql_pred_paths.map{|path| " UNION { #{path} } "}.join("\n")}
+    #{union_pred_paths.join("\n")}
   }
 SPARQL
     end
@@ -73,12 +73,13 @@ SPARQL
     # from Base#find_query
     def self.find_query( url )
 <<SPARQL
-  SELECT DISTINCT <#{url}> AS ?url ?class #{sparql_pred_variables}
+  SELECT DISTINCT ?url ?class #{sparql_pred_variables}
   WHERE {
-    { ?url a <http://ddcat.tenforce.com/Plugin>. }
-    #{sparql_pred_paths.map{|path| " UNION { #{path} } "}.join("\n")}
+    FILTER( ?url = <#{url}> )
+    { ?url a <#{self.class_uri}>. }
+    #{union_pred_paths.join("\n")}
     UNION {
-      ?url <http://active_sparql.sem.tf/v0.1#applicationClass> ?class.
+      ?url <http://active-sparql.sem.tf/v0.1/applicationClass> ?class.
     }
   }
 SPARQL
@@ -136,12 +137,24 @@ SPARQL
   private
 
     def self.sparql_pred_variables
-      self.variables.keys.map{|k| "?#{k.to_s}" }.join(" ")
+      (self.variables.keys + self.has_one_links.keys).map{ |k| "?#{k.to_s}" }.join(" ")
     end
 
     def self.sparql_pred_paths
-      self.variables.collect do |k,v|
-        "?url " + v.map{|v| "<#{v.to_s}>"}.join(" / ") + " ?#{k.to_s}."
+      pred_paths = []
+      variables = self.variables.each do |k,v|
+        pred_paths << "?url " + v.map{|v| "<#{v.to_s}>"}.join(" / ") + " ?#{k.to_s}."
+      end
+      links = self.has_one_links.each do |k, options|
+        v = options[:predicates]
+        pred_paths << "?url " + v.map{|v| "<#{v.to_s}>"}.join(" / ") + " ?#{k.to_s}."
+      end
+      pred_paths
+    end
+
+    def self.union_pred_paths
+      sparql_pred_paths.collect do |path|
+        "UNION { #{path} }"
       end
     end
 

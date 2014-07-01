@@ -62,7 +62,15 @@ module ActiveSparql
 
     # Returns the object with the supplide identifier
     def self.find( id )
-      self.load( Db.query(find_query( id ) , self.object_graph).first )
+      query = find_query( id )
+      result = Db.query(find_query( id ) , self.object_graph)
+
+      merged_result = {}
+      result.each do |res|
+        merged_result.empty_merge! res
+      end
+
+      self.load( merged_result )
     end
 
     # Indicates that this object is persisted.
