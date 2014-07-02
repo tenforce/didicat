@@ -35,6 +35,12 @@ class Api::KittensController < ApplicationController
     head :no_content
   end
 
+  def request_info
+    @request_info ||= RequestInfo.new( :method => request.request_method_symbol,
+                                       :path => "/#{params[:path]}",
+                                       :request => request )
+  end
+
 private
 
   def kitten_params
