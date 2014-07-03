@@ -30,11 +30,6 @@ class Combinator < ActiveSparql::Simple
 
   @class_uri = "http://didicat.sem.tf/v0.1/combinator"
 
-  # Retrieves the plugin
-  def plugin
-    @plugin
-  end
-
   # Returns the base_value which is used to combine the first result.
   def base_value
     raise "#{self.class.name} should define a none_value."
@@ -43,6 +38,14 @@ class Combinator < ActiveSparql::Simple
   # Combines the first value with the newly extracted information.
   def combine( base, extracted_information )
     raise "#{self.class.name} should override the combine method."
+  end
+
+  # Combines all of the results.  If this isn't overridden, an
+  # implementation is built based on base_value and combine
+  def combine_all( results )
+    current = base_value
+    results.each { |res| current = combine( current, res ) }
+    current
   end
 
 end
