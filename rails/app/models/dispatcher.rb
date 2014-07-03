@@ -26,13 +26,12 @@ class Dispatcher < ActiveSparql::Simple
   # Dispatches the request to the supplied kittens and the supplied
   # both variables contain a list of contact-points.
   def dispatch( kittens, friends )
-    dispatch_kittens( kittens )
-    dispatch_friends( friends )
+    dispatch_kittens( kittens ) + dispatch_friends( friends )
   end
 
   # Dispatches the request to the kittens.
   def dispatch_kittens( kittens )
-    dispatch_kittens.collect { |kitten| dispatch_kitten kitten }
+    kittens.collect { |kitten| dispatch_kitten kitten }
   end
 
   # Dispatches the request to a single kitten.
@@ -42,7 +41,7 @@ class Dispatcher < ActiveSparql::Simple
 
   # Dispatches the request to the friends.
   def dispatch_friends( friends )
-    dispatch_friends.collect { |friend| dispatch_friend friend }
+    friends.collect { |friend| dispatch_friend friend }
   end
 
   # Dispatches the request to a single friend.
