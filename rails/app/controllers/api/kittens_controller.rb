@@ -1,4 +1,5 @@
 class Api::KittensController < ApplicationController
+  include PluginByRequestSupportMixin
 
   def index
     render json: Kitten.all
@@ -38,16 +39,6 @@ class Api::KittensController < ApplicationController
     kitten = Kitten.find params[:id]
     kitten.destroy
     head :no_content
-  end
-
-  def request_info
-    @request_info ||= RequestInfo.new( :method => request.request_method_symbol,
-                                       :path => "/#{params[:path]}",
-                                       :request => request )
-  end
-
-  def plugin
-    Plugin.find_by_request request_info
   end
 
 private
