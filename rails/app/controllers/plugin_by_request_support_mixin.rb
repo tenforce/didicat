@@ -5,7 +5,8 @@ module PluginByRequestSupportMixin
   def request_info
     @request_info ||= RequestInfo.new( :method => request.request_method_symbol,
                                        :path => "/#{params[:path]}",
-                                       :request => request )
+                                       :request => request,
+                                       :params => params )
   end
 
   def plugin

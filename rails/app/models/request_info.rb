@@ -5,5 +5,6 @@ class RequestInfo
   attr_accessor :method
   attr_accessor :path
   attr_accessor :request
+  attr_accessor :params
 
 end
