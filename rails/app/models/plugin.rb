@@ -7,8 +7,16 @@ class Plugin < ActiveSparql::Simple
   has_one :extractor, "http://didicat.sem.tf/v0.1/extractor", class: :information_extractor
   has_one :dispatcher, "http://didicat.sem.tf/v0.1/dispatcher"
 
-  attr_accessor :id,:url,:requests
+  attr_accessor :id,:url,:request
   validates_presence_of :url
+
+  def kitten_dispatch( request )
+    prepare_dispatch
+    kittens = Kitten.all.select { |kitten| filter.contact_kitten? request, kitten }
+    results = dispatcher.dispatch kittens, []
+    extracted_info = results.collect { |res| extractor.extract( res ) }
+    combinator.combine_all extracted_info
+  end
 
   # Retrieves the plugins from a remote source
   def self.add_remote_plugin( url )
@@ -18,24 +26,43 @@ class Plugin < ActiveSparql::Simple
   end
 
   # Retrieves the plugin based on the posed request object
-  def self.find_by_request( path, method )
-    urls = Db.query(:plugin) do
+  def self.find_by_request( request_info )
+    path = request_info.path
+    method = request_info.method
+    query_answers = Db.query( object_graph ) do
 <<SPARQL
   SELECT DISTINCT ?url
   WHERE {
-    ?url a <http://ddcat.tenforce.com/Plugin>;
-         <http://ddcat.tenforce.com/request> ?request.
-    ?request <http://ddcat.tenforce.com/pathRegex> ?regex;
-             <http://ddcat.tenforce.com/verb> "#{method.to_s.upcase}".
+    ?url a <http://didicat.sem.tf/v0.1/Plugin>;
+         <http://didicat.sem.tf/v0.1/regex> ?regex;
+         <http://didicat.sem.tf/v0.1/verb> "#{method.to_s.upcase}".
     FILTER regex("#{path}", ?regex)
   }
 SPARQL
     end
 
-    urls.map { |url| Plugin.find url }
+    plugins = query_answers.map{ |p| p[:url] }.map{ |url| Plugin.find url }
+
+    if plugins.length == 0
+      raise "Could not find plugin for #{method.to_s.upcase} #{path}"
+    elsif plugins.length > 1
+      raise "More than one plugin answers #{method.to_s.upcase} #{path}"
+    else
+      plugin = plugins.first
+      plugin.request = request_info
+      plugin
+    end
+
   end
 
 protected
+
+  # Prepares the plugin and its contained elements so they are ready for dispatching
+  def prepare_dispatch
+    [filter,combinator,extractor,dispatcher].each do |o|
+      o.plugin = self
+    end
+  end
 
   # Names of the headers which ought to be forwarded for this request
   def self.required_headers_for_request( request_uri )
