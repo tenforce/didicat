@@ -11,6 +11,8 @@ gem 'sqlite3'
 
 gem 'active_model_serializers'
 
+gem 'parallel'
+
 group :development do
   gem 'guard-bundler'
   gem 'guard-rails'
