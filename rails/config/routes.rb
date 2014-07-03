@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   namespace :api do
     resources :friends
-    resources :kittens
+    resources :kittens do
+      collection do
+        get 'dispatch/:path', :to => "kittens#plugin_dispatch", :constraints => { :path => /.*/ }
+      end
+    end
 
     delete 'plugins/:id' => 'plugins#destroy', :constraints => { :id => /[^\/]+/}
     put 'plugins/:id'    => 'plugins#update' , :constraints => { :id => /[^\/]+/}

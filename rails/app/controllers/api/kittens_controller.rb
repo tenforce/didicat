@@ -29,6 +29,11 @@ class Api::KittensController < ApplicationController
     end
   end
 
+  # forward the request to each of our kittens
+  def plugin_dispatch
+    render :json => plugin.kitten_dispatch( request_info )
+  end
+
   def destroy
     kitten = Kitten.find params[:id]
     kitten.destroy
@@ -39,6 +44,10 @@ class Api::KittensController < ApplicationController
     @request_info ||= RequestInfo.new( :method => request.request_method_symbol,
                                        :path => "/#{params[:path]}",
                                        :request => request )
+  end
+
+  def plugin
+    Plugin.find_by_request request_info
   end
 
 private
