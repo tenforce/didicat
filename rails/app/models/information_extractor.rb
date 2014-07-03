@@ -28,9 +28,8 @@ class InformationExtractor < ActiveSparql::Simple
 
   @@class_uri = "http://didicat.sem.tf/v0.1/information_extractor"
 
-  # Extracts the information from the response and/or body.  The body
-  # provides an easier way of accessing the returned content.
-  def extract( response, body )
+  # Extracts the information from the response.
+  def extract( response )
     raise "#{self.class.name} should override the extract method."
   end
 

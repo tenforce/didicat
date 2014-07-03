@@ -1,8 +1,8 @@
+# Extracts the title of the page from a text/html response
 class InformationExtractors::TitleExtractor < InformationExtractor
 
-  def extract( response , body )
-    parsed = Nokogiri.parse body
-    parsed.css("title").first.text
+  def extract( response )
+    Nogokiri.parse(response).css("title").first.text
   end
 
 end
