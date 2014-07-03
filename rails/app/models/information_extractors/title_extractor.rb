@@ -2,7 +2,7 @@
 class InformationExtractors::TitleExtractor < InformationExtractor
 
   def extract( response )
-    Nogokiri.parse(response).css("title").first.text
+    Nokogiri.parse(response).css("title").first.text
   end
 
 end
