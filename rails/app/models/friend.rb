@@ -1,4 +1,5 @@
 class Friend < ActiveSparql::Simple
+
   @class_uri = 'http://ddcat.edcat.tenforce.com/Friend'
 
   validates_presence_of :url

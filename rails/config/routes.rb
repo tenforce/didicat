@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   namespace :api do
-    resources :friends
+    resources :friends do
+      collection do
+        get 'dispatch/:path', :to => "friends#plugin_dispatch", :constraints => { :path => /.*/ }
+      end
+    end
     resources :kittens do
       collection do
         get 'dispatch/:path', :to => "kittens#plugin_dispatch", :constraints => { :path => /.*/ }
