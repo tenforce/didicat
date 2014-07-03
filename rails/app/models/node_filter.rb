@@ -44,7 +44,7 @@ class NodeFilter < ActiveSparql::Simple
   # Return true if we should contact kitten when handling request.
   #
   # Request is the didicat-specific request object.
-  def contact_kitten?( request, friend )
+  def contact_kitten?( request, kitten )
     raise "#{self.class.to_s} should override contact_kitten?"
   end
 
