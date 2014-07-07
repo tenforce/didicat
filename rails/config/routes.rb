@@ -11,9 +11,10 @@ Rails.application.routes.draw do
       end
     end
 
-    delete 'plugins/:id' => 'plugins#destroy', :constraints => { :id => /[^\/]+/}
-    put 'plugins/:id'    => 'plugins#update' , :constraints => { :id => /[^\/]+/}
+    delete 'plugins/:id' => 'plugins#destroy', :constraints => { :id => /[^\/]+/ }
+    put 'plugins/:id'    => 'plugins#update' , :constraints => { :id => /[^\/]+/ }
     resources :plugins
+    get 'filters/:path', :to => 'filters#create', :constraints => { :path => /.*/ }
 
     post 'peer_cnnctr' => "peer_cnnctr#update"
   end
