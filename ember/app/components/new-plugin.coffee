@@ -1,3 +1,5 @@
+`import Ember from 'ember'`
+
 NewPluginComponent = Ember.Component.extend
   classNames: 'plugin-entry'
   actions:
@@ -6,4 +8,4 @@ NewPluginComponent = Ember.Component.extend
       @set 'url', ''
   url: ''
 
-`export default NewPluginComponent;`
+`export default NewPluginComponent`

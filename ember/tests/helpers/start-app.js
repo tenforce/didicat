@@ -1,8 +1,11 @@
 /* global require */
 require('didicat/tests/helpers/should-have-element');
 
+
 var Application = require('didicat/app')['default'];
 var Router = require('didicat/router')['default'];
+import Ember from 'ember';
+
 
 export default function startApp(attrs) {
   var App;

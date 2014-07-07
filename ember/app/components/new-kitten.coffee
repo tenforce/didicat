@@ -1,3 +1,5 @@
+`import Ember from 'ember'`
+
 NewKittenComponent = Ember.Component.extend
   classNames: "kitten-entry"
   actions:
@@ -6,4 +8,4 @@ NewKittenComponent = Ember.Component.extend
       @set 'url', ''
   url: ""
 
-`export default NewKittenComponent;`
+`export default NewKittenComponent`

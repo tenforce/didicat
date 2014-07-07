@@ -1,5 +1,7 @@
+`import Ember from 'ember'`
+
 Router = Ember.Router.extend
-  location: ENV.locationType
+  location: DidicatENV.locationType
 
 Router.map ->
   @resource 'friends', ->
@@ -7,4 +9,4 @@ Router.map ->
   @resource 'kittens'
   @resource 'plugins'
 
-`export default Router;`
+`export default Router`

@@ -1,3 +1,5 @@
+`import Ember from 'ember'`
+
 PluginsController = Ember.ArrayController.extend
   actions:
     createPlugin: (url) ->
@@ -10,4 +12,4 @@ PluginsController = Ember.ArrayController.extend
     deletePlugin: (plugin) ->
       plugin.destroyRecord()
 
-`export default PluginsController;`
+`export default PluginsController`

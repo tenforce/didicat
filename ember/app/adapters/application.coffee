@@ -1,3 +1,5 @@
+`import DS from 'ember-data'`
+
 adapter = DS.ActiveModelAdapter.extend
   namespace: 'api'
   buildURL: (type , id) ->

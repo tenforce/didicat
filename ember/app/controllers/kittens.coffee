@@ -1,3 +1,5 @@
+`import Ember from 'ember'`
+
 KittensController = Ember.ArrayController.extend
   actions:
     createKitten: (url) ->
@@ -7,4 +9,4 @@ KittensController = Ember.ArrayController.extend
       kitten.destroyRecord()
       
 
-`export default KittensController;`
+`export default KittensController`

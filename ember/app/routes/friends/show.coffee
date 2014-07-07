@@ -1,3 +1,5 @@
+`import Ember from 'ember'`
+
 FriendsShowRoute = Ember.Route.extend
   model: (params) ->
     @store.find 'friend', decodeURIComponent params.friend_url
@@ -5,4 +7,4 @@ FriendsShowRoute = Ember.Route.extend
   serialize: (model) ->
     friend_url: encodeURIComponent model.get 'url'
 
-`export default FriendsShowRoute;`
+`export default FriendsShowRoute`
