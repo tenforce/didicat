@@ -10,6 +10,17 @@ class Plugin < ActiveSparql::Simple
   attr_accessor :id,:url,:request
   validates_presence_of :url
 
+  # Dispatches the request both to our friends as to our kittens
+  def all_dispatch( request )
+    prepare_dispatch
+    kittens = Kitten.all.select { |kitten| filter.contact_kitten? request, kitten }
+    friends = Friend.all.select { |friend| filter.contact_friend? request, friend }
+    results = dispatcher.dispatch kittens, friends
+    extracted_info = results.collect { |res| extractor.extract( res ) }
+    combinator.combine_all extracted_info
+  end
+
+  # Dispatches the request only to our kittens
   def kitten_dispatch( request )
     prepare_dispatch
     kittens = Kitten.all.select { |kitten| filter.contact_kitten? request, kitten }
