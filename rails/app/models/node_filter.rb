@@ -48,4 +48,19 @@ class NodeFilter < ActiveSparql::Simple
     raise "#{self.class.to_s} should override contact_kitten?"
   end
 
+  # You can filter for a specific filter-request.  The filter will
+  # need to specify what options to supply to the request-filter.
+  #
+  # In order to build the filter, a request will be made to the path
+  # where the plugin which incorporates this filter resides (or
+  # deeper).  All info for the request should be supplied with
+  # keywords or the path in this request.
+  #
+  # If a requester chooses to make use of this functionality, the
+  # request which uses the supplied filter will be supplied using the
+  # :filter_key parameter.
+  def make_filter_key( request )
+    return ""
+  end
+
 end
