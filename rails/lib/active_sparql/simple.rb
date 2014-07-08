@@ -59,6 +59,16 @@ module ActiveSparql
       Cfg.active_sparql_graph
     end
 
+    # Override self.all so we always go through find.
+    #
+    # The base implementation doesn't retrieve all values.
+    def self.all
+      result = Db.query( all_query , self.object_graph )
+      result.map do |hash|
+        self.find hash["url"]
+      end
+    end
+
     # from Base#all_query
     def self.all_query
 <<SPARQL
