@@ -6,7 +6,12 @@
 
     <ul>
       {{#each}}
-        <li>{{url}} <a href="#" {{action 'deletePlugin' this}}>(remove)</a></li>
+        <li>
+          {{url}} <a href="#" {{action 'deletePlugin' this}}>(remove)</a>
+          <ul>
+            <li>{{requestMethod}} {{requestRegex}}</li>
+          </ul>
+        </li>
       {{/each}}
     </ul>
   </div>
