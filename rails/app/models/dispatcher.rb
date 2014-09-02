@@ -21,7 +21,7 @@
 class Dispatcher < ActiveSparql::Simple
   include PluginComponentMixin
 
-  @class_uri = "http://didicat.sem.tf/v0.1/dispatcher"
+  @class_uri = "http://didicat.semte.ch/v0.1/dispatcher"
 
   # Dispatches the request to the supplied kittens and the supplied
   # both variables contain a list of contact-points.

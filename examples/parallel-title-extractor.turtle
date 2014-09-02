@@ -1,0 +1,23 @@
+@prefix ex: <http://didicat.semte.ch/examples/>.
+@prefix didi: <http://didicat.semte.ch/v0.1/>.
+@prefix as: <http://active-sparql.semte.ch/v0.1/>.
+
+ex:list-combinator a didi:combinator;
+                     as:applicationClass "Combinators::ListCombinator".
+
+ex:parallel-dispatcher a didi:dispatcher;
+                       as:applicationClass "Dispatchers::ParallelDispatcher".
+
+ex:title-extractor a didi:information_extractor;
+                     as:applicationClass "InformationExtractors::TitleExtractor".
+
+ex:all-filter a didi:node_filter;
+                as:applicationClass "NodeFilters::All".
+
+ex:parallel-children-title-plugin a didi:Plugin;
+                                  didi:regex "^/parallel-titles";
+                                  didi:verb "GET";
+                                  didi:filter ex:all-filter;
+                                  didi:combinator ex:list-combinator;
+                                  didi:extractor ex:title-extractor;
+                                  didi:dispatcher ex:parallel-dispatcher.

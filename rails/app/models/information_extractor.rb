@@ -26,7 +26,7 @@
 class InformationExtractor < ActiveSparql::Simple
   include PluginComponentMixin
 
-  @@class_uri = "http://didicat.sem.tf/v0.1/information_extractor"
+  @@class_uri = "http://didicat.semte.ch/v0.1/information_extractor"
 
   # Extracts the information from the response.
   def extract( response )

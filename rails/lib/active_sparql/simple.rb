@@ -2,7 +2,7 @@ module ActiveSparql
   class Simple < Base
 
     attr_accessor :url
-    @class_uri = "http://active-sparql.sem.tf/v0.1/simple"
+    @class_uri = "http://active-sparql.semte.ch/v0.1/simple"
     @variables = {}
     @has_one_links = {}
 
@@ -89,7 +89,7 @@ SPARQL
     { ?url a <#{self.class_uri}>. }
     #{union_pred_paths.join("\n")}
     UNION {
-      ?url <http://active-sparql.sem.tf/v0.1/applicationClass> ?class.
+      ?url <http://active-sparql.semte.ch/v0.1/applicationClass> ?class.
     }
   }
 SPARQL
@@ -129,7 +129,7 @@ SPARQL
       # set the class name
       graph << [url.to_uri, "http://www.w3.org/1999/02/22-rdf-syntax-ns#type".to_uri, klass.class_uri.to_uri]
       # set the application class
-      graph << [url.to_uri, "http://active-sparql.sem.tf/v0.1/applicationClass".to_uri, klass.to_s ]
+      graph << [url.to_uri, "http://active-sparql.semte.ch/v0.1/applicationClass".to_uri, klass.to_s ]
     end
 
     def fetch_object_triples

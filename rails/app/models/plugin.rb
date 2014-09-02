@@ -1,11 +1,11 @@
 class Plugin < ActiveSparql::Simple
-  @class_uri = 'http://didicat.sem.tf/v0.1/Plugin'
-  pred :regex, "http://didicat.sem.tf/v0.1/regex"
-  pred :verb,  "http://didicat.sem.tf/v0.1/verb"
-  has_one :filter, ["http://didicat.sem.tf/v0.1/filter"], class: :node_filter
-  has_one :combinator, "http://didicat.sem.tf/v0.1/combinator"
-  has_one :extractor, "http://didicat.sem.tf/v0.1/extractor", class: :information_extractor
-  has_one :dispatcher, "http://didicat.sem.tf/v0.1/dispatcher"
+  @class_uri = 'http://didicat.semte.ch/v0.1/Plugin'
+  pred :regex, "http://didicat.semte.ch/v0.1/regex"
+  pred :verb,  "http://didicat.semte.ch/v0.1/verb"
+  has_one :filter, ["http://didicat.semte.ch/v0.1/filter"], class: :node_filter
+  has_one :combinator, "http://didicat.semte.ch/v0.1/combinator"
+  has_one :extractor, "http://didicat.semte.ch/v0.1/extractor", class: :information_extractor
+  has_one :dispatcher, "http://didicat.semte.ch/v0.1/dispatcher"
 
   attr_accessor :id,:url,:request
   validates_presence_of :url
@@ -44,9 +44,9 @@ class Plugin < ActiveSparql::Simple
 <<SPARQL
   SELECT DISTINCT ?url
   WHERE {
-    ?url a <http://didicat.sem.tf/v0.1/Plugin>;
-         <http://didicat.sem.tf/v0.1/regex> ?regex;
-         <http://didicat.sem.tf/v0.1/verb> "#{method.to_s.upcase}".
+    ?url a <http://didicat.semte.ch/v0.1/Plugin>;
+         <http://didicat.semte.ch/v0.1/regex> ?regex;
+         <http://didicat.semte.ch/v0.1/verb> "#{method.to_s.upcase}".
     FILTER regex("#{path}", ?regex)
   }
 SPARQL

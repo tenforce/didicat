@@ -28,7 +28,7 @@
 class Combinator < ActiveSparql::Simple
   include PluginComponentMixin
 
-  @class_uri = "http://didicat.sem.tf/v0.1/combinator"
+  @class_uri = "http://didicat.semte.ch/v0.1/combinator"
 
   # Returns the base_value which is used to combine the first result.
   def base_value
