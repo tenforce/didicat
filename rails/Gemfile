@@ -13,6 +13,8 @@ gem 'active_model_serializers'
 
 gem 'parallel'
 
+gem 'httparty'
+
 group :development do
   gem 'guard-bundler'
   gem 'guard-rails'

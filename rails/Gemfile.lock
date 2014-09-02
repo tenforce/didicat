@@ -65,6 +65,9 @@ GEM
     haml (4.0.5)
       tilt
     hike (1.2.3)
+    httparty (0.13.1)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     i18n (0.6.9)
     json (1.8.1)
     listen (2.7.6)
@@ -80,6 +83,7 @@ GEM
     mini_portile (0.5.3)
     minitest (5.3.4)
     multi_json (1.10.1)
+    multi_xml (0.5.5)
     net-http-persistent (2.9.4)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
@@ -169,6 +173,7 @@ DEPENDENCIES
   guard-bundler
   guard-rails
   guard-rspec
+  httparty
   nokogiri
   parallel
   pry
