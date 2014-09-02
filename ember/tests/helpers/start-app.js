@@ -1,11 +1,9 @@
 /* global require */
-require('didicat/tests/helpers/should-have-element');
-
+import shouldHaveElement from './should-have-element';
 
 var Application = require('didicat/app')['default'];
 var Router = require('didicat/router')['default'];
 import Ember from 'ember';
-
 
 export default function startApp(attrs) {
   var App;
@@ -13,7 +11,7 @@ export default function startApp(attrs) {
   var attributes = Ember.merge({
     // useful Test defaults
     rootElement: '#ember-testing',
-    LOG_ACTIVE_GENERATION:false,
+    LOG_ACTIVE_GENERATION: false,
     LOG_VIEW_LOOKUPS: false
   }, attrs); // but you can override;
 
@@ -21,7 +19,7 @@ export default function startApp(attrs) {
     location: 'none'
   });
 
-  Ember.run(function(){
+  Ember.run(function() {
     App = Application.create(attributes);
     App.setupForTesting();
     App.injectTestHelpers();

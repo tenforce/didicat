@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="assets/vendor.css">
     <link rel="stylesheet" href="assets/didicat.css">
-    <link rel="stylesheet" href="assets/qunit.css">
+    <link rel="stylesheet" href="assets/test-support.css">
     <style>
       #ember-testing-container {
         position: absolute;
@@ -33,16 +33,14 @@
     <div id="qunit"></div>
     <div id="qunit-fixture"></div>
 
-    <script>
-      window.DidicatENV = {{ENV}};
-      window.EmberENV = window.DidicatENV.EmberENV;
-    </script>
-    <script src="assets/qunit.js"></script>
-    <script src="assets/qunit-notifications.js"></script>
     <script src="assets/vendor.js"></script>
+    <script src="assets/test-support.js"></script>
     <script src="assets/didicat.js"></script>
     <script src="testem.js"></script>
     <script>
+      window.DidicatENV = require('didicat/config/environment')['default'];
+      window.EmberENV = window.DidicatENV.EmberENV;
+
       require('didicat/tests/test-helper');
     </script>
     <script src="assets/test-loader.js"></script>

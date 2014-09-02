@@ -14,13 +14,11 @@
     <link rel="stylesheet" href="assets/didicat.css">
   </head>
   <body>
-    <script>
-      window.DidicatENV = {{ENV}};
-      window.EmberENV = window.DidicatENV.EmberENV;
-    </script>
     <script src="assets/vendor.js"></script>
     <script src="assets/didicat.js"></script>
     <script>
+      window.DidicatENV = require('didicat/config/environment')['default'];
+      window.EmberENV = window.DidicatENV.EmberENV;
       window.Didicat = require('didicat/app')['default'].create(DidicatENV.APP);
     </script>
   </body>
