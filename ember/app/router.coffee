@@ -8,5 +8,6 @@ Router.map ->
     @route 'show', path: ':friend_url'
   @resource 'kittens'
   @resource 'plugins'
+  @route 'requests'
 
 `export default Router`
