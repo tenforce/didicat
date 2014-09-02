@@ -3,13 +3,15 @@
 App = null
 server = null
 
+titlesResponse = "[\"one\",\"two\"]"
+
 module 'Integration - Kittens page',
   setup: ->
     App = startApp()
 
     server = new Pretender ->
-      @get '/api/kittens', (request) ->
-        [200, {'Content-Type': 'application/json'}, null]
+      @get '/api/friends/dispatch/titles', (request) ->
+        [200, {'Content-Type': 'application/json'}, titlesResponse]
     
   teardown: ->
     Ember.run(App, 'destroy')
@@ -22,5 +24,24 @@ test 'Should navigate to the requests page', ->
 
 test 'Should contain a tab for sending a request to everyone', ->
   visit('/requests').then ->
-    ok find('.request-builder').length >= 1
-    ok find('.response').length >= 1
+    shouldHaveElement '.request-builder'
+
+test 'Should have an input field for the request path', ->
+  visit('/requests').then ->
+    shouldHaveElement '.request-builder input'
+
+test 'Should have a button for sending the request', -> 
+  visit('/requests').then ->
+    shouldHaveElement 'button.send-request'
+
+# # Sending is hooked to an ajax request at the moment, hence testing requires a timeout
+# test 'Should show the response in the response block', ->
+#   visit('/requests').then ->
+#     # enter the titles request
+#     fillIn '.request-builder input', 'titles'
+#     # send the enter keycode
+#     keyEvent '.request-builder input', 'keyup', 13
+#     # find the kitten
+#     andThen ->
+#       shouldHaveElement '.response'
+#       equal find('.response').text(), titlesResponse

@@ -1,1 +1,40 @@
 <h3>You can send requests through this interface</h3>
+
+<div class="row">
+  <div class="request-builder">
+    <div class="col-lg-8">
+      <div class="input-group">
+        {{input type="text" action="sendRequest" value=path placeholder="titles <enter>" classNames="form-control" disabled=sending}}
+        <span class="input-group-btn">
+          <button class="btn btn-default send-request" {{action "sendRequest"}} {{bind-attr disabled=sending}} type="button">Go!</button>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h2>Request path</h2>
+<div class="row">
+  <div class="col-lg-8">
+    <div class="Request info">
+  Sending <code>GET</code> request to <code>{{url}}</code>
+    </div>
+  </div>
+</div>
+
+{{#if sending}}
+  <div class="row">
+    <div class="col-lg-8">
+      Wait a moment, sending . . .
+    </div>
+  </div>
+{{/if}}
+
+{{#if response}}
+  <h2>Response</h2>
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="response">{{response}}</div>
+    </div>
+  </div>
+{{/if}}
