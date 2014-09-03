@@ -2,7 +2,7 @@
 #
 # Sends the requests with a requested JSON request format and parses the request
 # format.  Assumes requests are GET requests.
-class Dispatchers::ParallelDispatcher < Dispatchers::SerialDispatcher
+class Dispatchers::ParallelJson < Dispatchers::SerialDispatcher
   include Dispatchers::ParallelDispatcherMixin
   include HTTParty
   format :json
