@@ -32,7 +32,7 @@ class Api::KittensController < ApplicationController
 
   # forward the request to each of our kittens
   def plugin_dispatch
-    render :json => plugin.kitten_dispatch( request_info )
+    render :json => plugin.kitten_dispatch( request_info ).to_json
   end
 
   def destroy

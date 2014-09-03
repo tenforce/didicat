@@ -11,7 +11,7 @@ class Api::FriendsController < ApplicationController
 
   # Forward the request to each of our friends (and to ourselves)
   def plugin_dispatch
-    render :json => plugin.all_dispatch( request_info )
+    render :json => plugin.all_dispatch( request_info ).to_json
   end
 
 end
