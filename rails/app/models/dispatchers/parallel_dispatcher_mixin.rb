@@ -5,14 +5,14 @@
 module Dispatchers::ParallelDispatcherMixin
 
   def dispatch( kittens , friends )
-    kittens = Parallel.map( kittens , :in_threads => 8 ) do |kitten|
+    kittens_result = Parallel.map( kittens , :in_threads => 8 ) do |kitten|
       dispatch_kitten kitten
     end
-    friends = Parallel.map( friends , :in_threads => 32 ) do |friend|
+    friends_result = Parallel.map( friends , :in_threads => 32 ) do |friend|
       dispatch_friend friend
     end
 
-    kittens + friends
+    kittens_result + friends_result
   end
 
 end
