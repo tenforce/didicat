@@ -1,0 +1,24 @@
+@prefix ex: <http://didicat.semte.ch/examples/>.
+@prefix ed: <http://didicat.semte.ch/examples/edcat/>.
+@prefix didi: <http://didicat.semte.ch/v0.1/>.
+@prefix as: <http://active-sparql.semte.ch/v0.1/>.
+
+ed:smart-list-combinator a didi:combinator;
+                         as:applicationClass "Combinators::SmartListCombinator".
+
+ed:edcat-dispatcher a didi:dispatcher;
+                    as:applicationClass "Dispatchers::EdcatDispatcher".
+
+ed:identity-extractor a didi:information_extractor;
+                      as:applicationClass "InformationExtractors::IdentityExtractor".
+
+ed:all-filter a didi:node_filter;
+                as:applicationClass "NodeFilters::All".
+
+ed:edcat-plugin a didi:Plugin;
+                didi:regex "^/edcat";
+                didi:verb "GET";
+                didi:filter ed:all-filter;
+                didi:combinator ed:smart-list-combinator;
+                didi:extractor ed:identity-extractor;
+                didi:dispatcher ed:edcat-dispatcher.
