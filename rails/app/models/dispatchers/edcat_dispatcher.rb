@@ -14,12 +14,8 @@ class Dispatchers::EdcatDispatcher < Dispatchers::SerialDispatcher
     "#{node.url}#{plugin.request.path}"
   end
 
-  def query_parameters
-    plugin.request.request.filtered_env.to_h["action_dispatch.request.query_parameters"]
-  end
-
   def get_json( url )
-    JSON.parse HTTParty.get( url , { query: query_parameters } ).body
+    JSON.parse HTTParty.get( url , { query: plugin.request.query_parameters } ).body
   end
 
   def dispatch_friend( friend )

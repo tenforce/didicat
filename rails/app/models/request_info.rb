@@ -7,4 +7,10 @@ class RequestInfo
   attr_accessor :request
   attr_accessor :params
 
+  # Returns the get parameters which were explicitly entered by the user
+  # for this request.
+  def query_parameters
+    request.filtered_env.to_h["action_dispatch.request.query_parameters"]
+  end
+
 end
