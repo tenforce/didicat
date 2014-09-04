@@ -2,7 +2,7 @@
 #
 # The requests for each node are sent assuming the nodes are the base path
 # for EDCAT instances.
-class Dispatchers::EdcatDispatcher < Dispatchers::SerialDispatcher
+class Dispatchers::EdcatDispatcher < Dispatcher
   include Dispatchers::ParallelDispatcherMixin
 
   def url_for_kitten( node )
