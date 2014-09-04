@@ -66,6 +66,7 @@ class NodeFilters::EdcatSearch < NodeFilter
         }
       QUERY
     Db.update( query )
+    key
   end
 
 protected
