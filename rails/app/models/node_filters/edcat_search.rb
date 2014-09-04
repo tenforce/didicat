@@ -42,23 +42,30 @@ class NodeFilters::EdcatSearch < NodeFilter
 
   def make_filter_key( request )
     key = generate_key
-    filter_uri = RDF::URI.new "http://didicat.semte.ch/v0.1/filters/#{key}"
-
     graph = RDF::Graph.new
-    graph << [ filter_uri , RDF::URI.new( "http://didicat.semte.ch/v0.1/filterKey" ), key ]
+    filter_uri = "http://didicat.semte.ch/v0.1/filters/#{key}".to_uri
 
+    # Set the key
+    graph << [ filter_uri , "http://didicat.semte.ch/v0.1/filterKey".to_uri , key ]
+
+    # Store each kitten
     responding_kittens( request ).each do |kitten|
       graph << [ filter_uri ,
-                 RDF::URI.new( "http://didicat.semte.ch/v0.1/kitten" ),
-                 RDF::RUI.new( kitten.url ) ]
-    end
-    responding_friends( request ).each do |friend|
-      graph << [ filter_uri ,
-                 RDF::URI.new( "http://didicat.semte.ch/v0.1/friend" ),
-                 RDF::URI.new( friend.url ) ]
+                 "http://didicat.semte.ch/v0.1/kitten".to_uri ,
+                 kitten.url.to_uri ]
     end
 
+    # Store each friend
+    responding_friends( request ).each do |friend|
+      graph << [ filter_uri ,
+                 "http://didicat.semte.ch/v0.1/friend".to_uri ,
+                 friend.url.to_uri ]
+    end
+
+    # Insert the data
     Db.insert_data( graph , :graph => RDF::URI.new( self.class.object_graph ) )
+
+    # Return the new key
     key
   end
 
