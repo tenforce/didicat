@@ -45,8 +45,11 @@ class NodeFilters::EdcatSearch < NodeFilter
     graph = RDF::Graph.new
     filter_uri = "http://didicat.semte.ch/v0.1/filters/#{key}".to_uri
 
-    # Set the key
+    # Set the base info
     graph << [ filter_uri , "http://didicat.semte.ch/v0.1/filterKey".to_uri , key ]
+    graph << [ filter_uri ,
+               "http://didicat.semte.ch/v0.1/filterSpec".to_uri ,
+               request.query_parameters_string ]
 
     # Store each kitten
     responding_kittens( request ).each do |kitten|

@@ -13,4 +13,10 @@ class RequestInfo
     request.filtered_env.to_h["action_dispatch.request.query_parameters"]
   end
 
+  # Returns a string containing the get parameters as they were intered
+  # by the user.
+  def query_parameters_string
+    request.filtered_env["rack.request.query_string"]
+  end
+
 end
