@@ -5,28 +5,44 @@
 
       <p>Any didiCAT service can be configured.  It knows where it is located and what it should use to store content.  With the right access, you'll be able to inspect and modify these resources to make your didiCAT instance operate in the connected world.</p>
 
-      <p>Find these settings in the <code>rails/config/didicat/</code> folder of your didiCAT deployment.</p>
+      <p>You can configure these settings in the <code>rails/config/didicat/</code> folder of your didiCAT deployment.</p>
     </div>
   </div>
 
   <div class="row">
     <div class="col-lg-5">
-      <h4>Peer group config</h4>
-      <dl>
-        <dt>my public location</dt>
-        <dd>{{peer_group.contact_point}}</dd>
-        <dt>peer cnnctr location</dt>
-        <dd>{{peer_group.peer_cnntr}}</dd>
-        <dt>peer cnnctr group</dt>
-        <dd>{{peer_group.peer_group}}</dd>
-      </dl>
-      <h4>Triple store config</h4>
-      <dl>
-        <dt>SPARQL endpoint</dt>
-        <dd>{{triple_store.sparql_endpoint}}</dd>
-        <dt>graph</dt>
-        <dd>{{triple_store.graph}}</dd>
-      </dl>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="panel-title">
+            Peer group config
+          </div>
+        </div>
+        <div class="panel-body">
+          <dl>
+            <dt>my public location</dt>
+            <dd>{{peer_group.contact_point}}</dd>
+            <dt>peer cnnctr location</dt>
+            <dd>{{peer_group.peer_cnntr}}</dd>
+            <dt>peer cnnctr group</dt>
+            <dd>{{peer_group.peer_group}}</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-5">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="panel-title">Triple store config</div>
+        </div>
+        <div class="panel-body">
+          <dl>
+            <dt>SPARQL endpoint</dt>
+            <dd>{{triple_store.sparql_endpoint}}</dd>
+            <dt>graph</dt>
+            <dd>{{triple_store.graph}}</dd>
+          </dl>
+        </div>
+      </div>
     </div>
   </div>
 </div>
