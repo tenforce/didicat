@@ -1,6 +1,7 @@
 `import Ember from 'ember'`
 
 RequestsController = Ember.Controller.extend
+  queryParams: ['path']
   actions:
     sendRequest: ->
       @set 'sending', true
