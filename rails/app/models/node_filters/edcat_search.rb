@@ -19,33 +19,34 @@ class NodeFilters::EdcatSearch < NodeFilter
     @kittens.include? kitten.url
   end
 
+  # Send the query to each of our kittens
+  # If a kitten responds: keep it
+  def responding_kittens( request )
+    Kitten.all.select do |kitten|
+      filter_node_by_search request, kitten.url
+    end
+  end
+
+  # Send the query to each of the friends
+  # If a friend responds: keep it
+  def responding_friends( request )
+    Friend.all.select do |friend|
+      filter_node_by_search request, "#{friend.url}/edcat"
+    end
+  end
+
+  # Generates a key for the filter
+  def generate_key
+    SecureRandom.urlsafe_base64
+  end
+
   def make_filter_key( request )
-    # accept any catalog which has one or more relevant catalogs
-    filter_method = Proc.new do |base_url|
-      begin
-        url = "#{base_url}/catalogs/search"
-        options = { query: request.query_parameters }
-        response = JSON.parse HTTParty.get( url , options ).body
-        response.class == Array && response.length > 0
-      rescue
-        false
-      end
-    end
-
-    # send the query to each of our kittens
-    # If a kitten responds: keep it
-    kittens = Kitten.all.select do |kitten|
-      filter_method.call kitten.url
-    end
-
-    # and to each of the friends
-    # If a friend responds: keep it
-    friends = Friend.all.select do |friend|
-      filter_method.call "#{friend.url}/edcat"
-    end
+    kittens = responding_kittens request
+    friends = responding_friends request
 
     # Save all in the database
-    key = SecureRandom.urlsafe_base64
+    key = generate_key
+
     constraints = ["didicat:filterKey \"#{key}\""]
     if kittens.length > 0
       kitten_urls = kittens.each.collect { |k| "<#{k.url}>" }
@@ -101,4 +102,17 @@ QUERY
     end
   end
 
+  # Filters a node by sending a search request
+  # If the search doesn't return an array or if the array is empty,
+  # the filter returns false.
+  def filter_node_by_search( request, base_url )
+    begin
+      url = "#{base_url}/catalogs/search"
+      options = { query: request.query_parameters }
+      response = JSON.parse HTTParty.get( url , options ).body
+      response.class == Array && response.length > 0
+    rescue
+      false
+    end
+  end
 end
