@@ -15,23 +15,19 @@ class Dispatchers::EdcatDispatcher < Dispatcher
   end
 
   def get_json( url )
-    HTTParty.get url , query: plugin.request.query_parameters
+    begin
+      HTTParty.get url , query: plugin.request.query_parameters
+    rescue
+      []
+    end
   end
 
   def dispatch_friend( friend )
-    begin
-      get_json url_for_friend( friend )
-    rescue
-      []
-    end
+    get_json url_for_friend( friend )
   end
 
   def dispatch_kitten( kitten )
-    begin
-      get_json url_for_kitten( kitten )
-    rescue
-      []
-    end
+    get_json url_for_kitten( kitten )
   end
 
 end
