@@ -5,15 +5,11 @@
 class Dispatchers::EdcatDispatcher < Dispatcher
   include Dispatchers::ParallelDispatcherMixin
 
-  def url_for_kitten( node )
-    # strip off edcat/ for the request
-    "#{node.url}#{plugin.request.path[6..-1]}"
-  end
-
-  def url_for_friend( node )
-    "#{node.url}#{plugin.request.path}"
-  end
-
+  # Send the search query to the supplied URL of the resource.
+  #
+  # Passes on all parameters from the currently active plugin
+  # and returns the resulting HTTParty response.  If anything
+  # fails in this process, an empty array is returned.
   def get_json( url )
     begin
       HTTParty.get url , query: plugin.request.query_parameters
@@ -22,12 +18,19 @@ class Dispatchers::EdcatDispatcher < Dispatcher
     end
   end
 
+  # Dispatches to a friend by forwarding the request without
+  # changing much of anything.
   def dispatch_friend( friend )
-    get_json url_for_friend( friend )
+    path = plugin.request.path
+    get_json "#{friend.url}#{path}"
   end
 
+  # Dispatches to a kitten by removing the extra edcat/ which
+  # is available both in the request path as in the kitten's
+  # url.
   def dispatch_kitten( kitten )
-    get_json url_for_kitten( kitten )
+    path = plugin.request.path[6..-1] # strip off edcat/
+    get_json "#{kitten.url}#{path}"
   end
 
 end
