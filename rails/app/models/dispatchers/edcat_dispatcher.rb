@@ -15,7 +15,7 @@ class Dispatchers::EdcatDispatcher < Dispatchers::SerialDispatcher
   end
 
   def get_json( url )
-    JSON.parse HTTParty.get( url , { query: plugin.request.query_parameters } ).body
+    HTTParty.get url , query: plugin.request.query_parameters
   end
 
   def dispatch_friend( friend )

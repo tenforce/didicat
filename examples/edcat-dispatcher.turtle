@@ -9,8 +9,8 @@ ed:smart-list-combinator a didi:combinator;
 ed:edcat-dispatcher a didi:dispatcher;
                     as:applicationClass "Dispatchers::EdcatDispatcher".
 
-ed:identity-extractor a didi:information_extractor;
-                      as:applicationClass "InformationExtractors::IdentityExtractor".
+ed:json-extractor a didi:information_extractor;
+                  as:applicationClass "InformationExtractors::Json".
 
 ed:edcat-search-filter a didi:node_filter;
                        as:applicationClass "NodeFilters::EdcatSearch".
@@ -20,5 +20,5 @@ ed:edcat-plugin a didi:Plugin;
                 didi:verb "GET";
                 didi:filter ed:edcat-search-filter;
                 didi:combinator ed:smart-list-combinator;
-                didi:extractor ed:identity-extractor;
+                didi:extractor ed:json-extractor;
                 didi:dispatcher ed:edcat-dispatcher.
