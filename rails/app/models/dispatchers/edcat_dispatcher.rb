@@ -19,11 +19,19 @@ class Dispatchers::EdcatDispatcher < Dispatchers::SerialDispatcher
   end
 
   def dispatch_friend( friend )
-    get_json url_for_friend( friend )
+    begin
+      get_json url_for_friend( friend )
+    rescue
+      []
+    end
   end
 
   def dispatch_kitten( kitten )
-    get_json url_for_kitten( kitten )
+    begin
+      get_json url_for_kitten( kitten )
+    rescue
+      []
+    end
   end
 
 end
