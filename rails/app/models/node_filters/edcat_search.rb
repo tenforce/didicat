@@ -89,7 +89,7 @@ WHERE {
 QUERY
 
       friends_query = <<QUERY
-PREFIX didicat: <http://didicat.semte.ch/v0.1>
+PREFIX didicat: <http://didicat.semte.ch/v0.1/>
 SELECT DISTINCT ?contact_url
 WHERE {
   ?filter_instance didicat:filterKey "#{request_params[:filter_key]}";
