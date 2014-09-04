@@ -3,8 +3,8 @@
 @prefix didi: <http://didicat.semte.ch/v0.1/>.
 @prefix as: <http://active-sparql.semte.ch/v0.1/>.
 
-ed:smart-list-combinator a didi:combinator;
-                         as:applicationClass "Combinators::SmartListCombinator".
+ed:edcat-search-filter a didi:node_filter;
+                       as:applicationClass "NodeFilters::EdcatSearch".
 
 ed:edcat-dispatcher a didi:dispatcher;
                     as:applicationClass "Dispatchers::EdcatDispatcher".
@@ -12,13 +12,13 @@ ed:edcat-dispatcher a didi:dispatcher;
 ed:json-extractor a didi:information_extractor;
                   as:applicationClass "InformationExtractors::Json".
 
-ed:edcat-search-filter a didi:node_filter;
-                       as:applicationClass "NodeFilters::EdcatSearch".
+ed:smart-list-combinator a didi:combinator;
+                         as:applicationClass "Combinators::SmartListCombinator".
 
 ed:edcat-plugin a didi:Plugin;
                 didi:regex "^/edcat";
                 didi:verb "GET";
                 didi:filter ed:edcat-search-filter;
-                didi:combinator ed:smart-list-combinator;
+                didi:dispatcher ed:edcat-dispatcher;
                 didi:extractor ed:json-extractor;
-                didi:dispatcher ed:edcat-dispatcher.
+                didi:combinator ed:smart-list-combinator.
