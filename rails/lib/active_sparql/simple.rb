@@ -101,12 +101,12 @@ SPARQL
       predicate_connection = {[] => url.to_uri}
       klass.variables.each do |keyword, predicates|
         value = self.send keyword
-        predicate_connection[predicates] = self.send value if value != nil
+        predicate_connection[predicates] = value if value != nil
       end
       # insert the information from the has_one_links
       klass.has_one_links.each do |keyword, options|
         object = self.send( keyword )
-        predicate_connection[predicates] = object.url if object
+        predicate_connection[options[:predicates]] = object.url if object
       end
 
       predicate_connection.clone.each do |predicates , keyword|
@@ -116,11 +116,11 @@ SPARQL
             unless predicate_connection.has_key? predicates
               blank_node = RDF::Node.new
               predicate_connection[predicates] = blank_node
-              graph << [predicate_connection[predicates[0,-2]] , predicates[-1].to_uri, blank_node]
+              graph << [predicate_connection[predicates[0..-2]] , predicates[-1].to_uri, blank_node]
             end
           end
           # write the final predicate
-          butlast_node = predicate_connection[predicates[0,-2]]
+          butlast_node = predicate_connection[predicates[0..-2]]
           last_node = predicate_connection[predicates]
           graph << [ butlast_node , predicates[-1].to_uri , last_node ]
         end
@@ -130,6 +130,7 @@ SPARQL
       graph << [url.to_uri, "http://www.w3.org/1999/02/22-rdf-syntax-ns#type".to_uri, klass.class_uri.to_uri]
       # set the application class
       graph << [url.to_uri, "http://active-sparql.semte.ch/v0.1/applicationClass".to_uri, klass.to_s ]
+      graph
     end
 
     def fetch_object_triples
