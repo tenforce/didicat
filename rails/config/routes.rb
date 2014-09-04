@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     put 'plugins/:id'    => 'plugins#update' , :constraints => { :id => /[^\/]+/ }
     resources :plugins
     get 'filters/:path', :to => 'filters#create', :constraints => { :path => /.*/ }
+    get 'config' => 'config#index'
 
     post 'peer_cnnctr' => "peer_cnnctr#update"
   end
