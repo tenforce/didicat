@@ -9,5 +9,6 @@ Router.map ->
   @resource 'kittens'
   @resource 'plugins'
   @route 'requests'
+  @route 'config'
 
 `export default Router`
