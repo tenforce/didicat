@@ -41,32 +41,24 @@ class NodeFilters::EdcatSearch < NodeFilter
   end
 
   def make_filter_key( request )
-    kittens = responding_kittens request
-    friends = responding_friends request
-
-    # Save all in the database
     key = generate_key
+    filter_uri = RDF::URI.new "http://didicat.semte.ch/v0.1/filters/#{key}"
 
-    constraints = ["didicat:filterKey \"#{key}\""]
-    if kittens.length > 0
-      kitten_urls = kittens.each.collect { |k| "<#{k.url}>" }
-      constraints << "didicat:kitten #{kitten_urls.join(', ')}"
+    graph = RDF::Graph.new
+    graph << [ filter_uri , RDF::URI.new( "http://didicat.semte.ch/v0.1/filterKey" ), key ]
+
+    responding_kittens( request ).each do |kitten|
+      graph << [ filter_uri ,
+                 RDF::URI.new( "http://didicat.semte.ch/v0.1/kitten" ),
+                 RDF::RUI.new( kitten.url ) ]
+    end
+    responding_friends( request ).each do |friend|
+      graph << [ filter_uri ,
+                 RDF::URI.new( "http://didicat.semte.ch/v0.1/friend" ),
+                 RDF::URI.new( friend.url ) ]
     end
 
-    if friends.length > 0
-      friend_urls = friends.each.collect { |f| "<#{f.url}>" }
-      constraints << "didicat:friend #{friend_urls.join(', ')}"
-    end
-
-    query = <<-QUERY
-        PREFIX didicat: <http://didicat.semte.ch/v0.1/>
-        PREFIX filters: <http://didicat.semte.ch/v0.1/filters/>
-        WITH <#{self.class.object_graph.to_s}>
-        INSERT DATA {
-          filters:#{key} #{constraints.join(";\n\t")}.
-        }
-      QUERY
-    Db.update( query )
+    Db.insert_data( graph , :graph => RDF::URI.new( self.class.object_graph ) )
     key
   end
 
