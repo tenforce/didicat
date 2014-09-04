@@ -12,13 +12,13 @@ ed:edcat-dispatcher a didi:dispatcher;
 ed:identity-extractor a didi:information_extractor;
                       as:applicationClass "InformationExtractors::IdentityExtractor".
 
-ed:all-filter a didi:node_filter;
-                as:applicationClass "NodeFilters::All".
+ed:edcat-search-filter a didi:node_filter;
+                       as:applicationClass "NodeFilters::EdcatSearch".
 
 ed:edcat-plugin a didi:Plugin;
                 didi:regex "^/edcat";
                 didi:verb "GET";
-                didi:filter ed:all-filter;
+                didi:filter ed:edcat-search-filter;
                 didi:combinator ed:smart-list-combinator;
                 didi:extractor ed:identity-extractor;
                 didi:dispatcher ed:edcat-dispatcher.
