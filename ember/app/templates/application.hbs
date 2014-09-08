@@ -4,12 +4,12 @@
   <nav>
     <div class="centered-tab-navigation">
       <ul class="nav nav-tabs nav-justified">
-        {{#link-to "application" tagName="li" classNames="home" href=false}}<a {{bind-attr href="view.href"}}>Home</a>{{/link-to}}
-        {{#link-to "friends" tagName="li" href=false}}<a {{bind-attr href="view.href"}}>Friends</a>{{/link-to}}
-        {{#link-to "kittens" tagName="li" href=false}}<a {{bind-attr href="view.href"}}>Kittens</a>{{/link-to}}
-        {{#link-to "plugins" tagName="li" href=false}}<a {{bind-attr href="view.href"}}>Plugins</a>{{/link-to}}
-        {{#link-to "requests" tagName="li" href=false}}<a {{bind-attr href="view.href"}}>Requests</a>{{/link-to}}
-        {{#link-to "config" tagName="li" href=false}}<a {{bind-attr href="view.href"}}>Configuration</a>{{/link-to}}
+        {{li-link 'Home' 'application' classNames="home"}}
+        {{li-link 'Friend' 'friends'}}
+        {{li-link 'Kittens' 'kittens'}}
+        {{li-link 'Plugins' 'plugins'}}
+        {{li-link 'Requests' 'requests'}}
+        {{li-link 'Configuration' 'config'}}
       </ul>
     </div>
   </nav>
