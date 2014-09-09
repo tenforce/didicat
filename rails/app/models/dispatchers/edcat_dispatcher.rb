@@ -12,7 +12,7 @@ class Dispatchers::EdcatDispatcher < Dispatcher
   # fails in this process, an empty array is returned.
   def get_json( url )
     begin
-      HTTParty.get url , query: plugin.request.query_parameters
+      HTTParty.get url , query: plugin.request.query_parameters.except("filter_key")
     rescue
       []
     end
