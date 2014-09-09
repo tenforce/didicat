@@ -2,14 +2,20 @@ class Dispatchers::SerialDispatcher < Dispatcher
 
   # The default behaviour of Dispatcher is to handle each friend in series
   def dispatch_friend( friend )
-    uri = URI "#{friend.url}/"
-    Net::HTTP.get( uri.host , uri.path ) # get is overly eager
+    begin
+      HTTParty.get("#{friend.url}#{plugin.request.path}").path
+    rescue
+      ""
+    end
   end
 
   # The default behaviour of Dispatcher is to handle each kitten in series
   def dispatch_kitten( kitten )
-    uri = URI "#{kitten.url}/"
-    Net::HTTP.get( uri.host , uri.path ) # get is overly eager
+    begin
+      HTTParty.get("#{kitten.url}#{plugin.request.path}").path
+    rescue
+      ""
+    end
   end
 
 end
